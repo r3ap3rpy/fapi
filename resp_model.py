@@ -1,20 +1,19 @@
-from pydantic import BaseModel
 from fastapi import FastAPI
+from pydantic import BaseModel
 import hashlib
+
 app = FastAPI()
 
-class UserInput(BaseModel):
-    name: str
+class RegIn(BaseModel):
     username: str
     password: str
+    email: str
 
-class UserOutput(BaseModel):
-    name: str
+class RegOut(BaseModel):
     username: str
-    #password: str
+    email: str
 
-@app.post("/user/", response_model= UserOutput)
-async def user(user: UserInput):
-    # Do whatever, store the pass etc
-    #user.password = hashlib.sha1(user.password.encode("utf-8")).hexdigest()
+@app.post("/register", response_model=RegOut)
+async def register(user: RegIn):
+    #user.password = hashlib.sha1(user.password.encode('utf-8')).hexdigest()
     return user

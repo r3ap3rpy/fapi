@@ -2,9 +2,13 @@ from fastapi import FastAPI, Form
 
 app = FastAPI()
 
+@app.post("/register")
+async def register(username: str = Form(...), password: str = Form(...), email: str = Form(...) ):
+    return {'username': username, 'password': password, 'email':email}
+
 @app.post("/login")
-async def login(username: str=Form(...), password: str=Form(...)):
-    return {"username":username, "password":password}
+async def login(username: str = Form(...), password: str = Form(...)):
+    return {'username':username, 'password': password}
 
 
 #import requests
